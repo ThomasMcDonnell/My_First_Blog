@@ -1,0 +1,64 @@
+{% extends "blog/base.html" %}
+
+
+{% block content %}
+
+     {% for post in post_list %}
+ <a href={% url 'post_detail' pk=post.pk %}>
+   <h1>
+        {{ post.title }}
+   </h1>
+ </a>
+ <div class="date postdate"><small>{{ post.published_date }}</small></div>
+
+<p class="post-meta content-markdown">
+      {{ post.text|truncatechars:100 }}
+</p>
+
+   <p><small>Comments : {{ post.approve_comments.count }}</small></p>
+   <hr>
+
+
+{% endfor%}
+
+  {% if is_paginated %}
+    <nav>
+      <ul class="pagination">
+        {% if page_obj.has_previous %}
+          <li>
+            <a href="?page={{ page_obj.previous_page_number }}">
+              <span>Previous</span>
+            </a>
+          </li>
+        {% else %}
+          <li class="disabled">
+            <a href="#">
+              <span>Previous</span>
+            </a>
+          </li>
+        {% endif %}
+
+        {% for page in paginator.page_range %}
+          <li {% if page == page_obj.number %}class="active"{% endif %}>
+            <a href="?page={{ page }}">{{ page }}</a>
+          </li>
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+          <li>
+            <a href="?page={{ page_obj.next_page_number }}">
+              <span>Next</span>
+            </a>
+          </li>
+        {% else %}
+          <li {% if not page_obj.has_next %}class="disabled"{% endif %}>
+            <a href="#">
+              <span>Next</span>
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+  {% endif %}
+
+{% endblock %}

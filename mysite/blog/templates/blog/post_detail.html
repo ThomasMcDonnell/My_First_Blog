@@ -1,0 +1,71 @@
+{% extends 'blog/base.html' %}
+
+{% block header %}{% endblock header %}
+
+{% block content %}
+
+<header>
+     <div class="container">
+        <div class="row">
+           <div class="col-lg-12 col-md-14 mx-auto">
+             <div class="post-heading"><h1>{{ post.title }}</h1></div>
+                  {% if post.published_date %}
+                 <div class="date postdate">
+                     <small>{{ post.published_date }}</small>
+                 </div>
+
+               {% else %}
+                 <a class="btn btn-primary" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+             {% endif %}
+           </div>
+        </div>
+     </div>
+</header>
+
+
+        <article>
+          <div class="container">
+               <div class="row">
+                    <div class="col-lg-12 col-md-14 mx-auto content-markdown">
+                         {{ post.text }}
+                    </div>
+               </div>
+          </div>
+        </article>
+
+
+      {% if user.is_authenticated %}
+          <a class="btn btn-primary" href="{% url 'post_edit' pk=post.pk %}">Edit</a>
+          <a class="btn btn-primary" href="{% url 'post_remove' pk=post.pk %}">Remove</a>
+      {% endif %}
+
+
+
+  <hr>
+  <a class="btn btn-primary" href="{% url 'add_comment_to_post' pk=post.pk %}">Comment</a>
+  <a class="btn btn-primary" id="comment">View Comments</a>
+<div id="fade" style="display:none;">
+
+  {% for comment in post.comments.all %}
+  <br>
+      {% if user.is_authenticated or comment.approved_comment %}
+      <div>
+           <blockquote>
+                    <small>{{ comment.created_date }}</small>
+                   {% if not comment.approved_comment %}
+                       <a class="btn btn-secondary" href="{% url 'comment_remove' pk=comment.pk %}">remove</a>
+                       <a class="btn btn-secondary" href="{% url 'comment_approve' pk=comment.pk %}">Ok</a>
+                   {% endif %}
+
+                    <p>{{ comment.text|safe|linebreaks }}</p>
+                    <p>Posted by: <strong>{{ comment.author }}</strong></p>
+            </blockquote>
+      </div>
+
+      {% endif %}
+  {% empty %}
+      <small id="fade" style="display:none;"><p>No comments posted.</p></small>
+  {% endfor %}
+</div>
+
+{% endblock %}

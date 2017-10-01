@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>def learn( ):</title>
+
+    <script src="//cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/medium-editor/latest/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/clean-blog.min.css' %}" rel="stylesheet">
+    <!-- Custom style sheet -->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    {% block head_extra %}{% endblock head_extra %}
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'post_list' %}">def learn( ):</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'post_list' %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'about'%}">About</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a href="{% url 'post_new' %}" >New Post</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'post_draft_list' %}">Drafts</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'logout' %}" >Log out</a>
+            </li>
+            <li class="nav-item">
+              <a >Hello : {{ user.username }}</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+
+    {% block header %}
+    <header class="masthead" style="background-image: url({% static 'img/post-bg.jpg' %})">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <h2 class="quote">Intellectual growth should commence at birth and cease only at death.</h2>
+              <span class="subheading"><cite> - Albert Einstein</cite></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+     {% endblock header %}
+
+
+    <!-- Main Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-preview">
+               {% block content %}
+               {% endblock %}
+
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/thomas-mcdonnell-350017149/">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://www.facebook.com/Thomas McDonnell">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/ThomasMcDonnell">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <p class="copyright text-muted">Copyright &copy; def learn( ): 2017</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script   src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/popper/popper.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="{% static 'js/clean-blog.min.js' %}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+         $(".content-markdown").each(function(){
+              var content = $(this).text()
+              var markedContent = marked(content.trim())
+              $(this).html(markedContent)
+         })
+         $(".content-markdown img").each(function(){
+              $(this).addClass("img-responsive");
+         })
+
+    })
+    </script>
+    <script>
+    $(document).ready(function(){
+         $("#comment").click(function(){
+              $("#fade").fadeToggle();
+         });
+    });
+    </script>
+    <script>
+    $(document).ready(function(){
+         // preview-title
+        var titleInput = $("#id_title");
+
+        function setTitle(value){
+             $("#preview-title").text(value)
+        }
+        setTitle(titleInput.val())
+
+        titleInput.keyup(function(){
+             var newContent = $(this).val()
+             setTitle(newContent)
+        })
+        // preview-content
+        var contentInput = $("#id_text");
+
+        function setContent(value){
+             var markedContent = marked(value)
+             $("#preview-content").html(markedContent)
+             $("#preview-content img").each(function(){
+                  $(this).addClass("img-responsive")
+             })
+        }
+        setContent(contentInput.val())
+
+        contentInput.keyup(function(){
+             var newContent = $(this).val()
+             setContent(newContent)
+        })
+    });
+    </script>
+  </body>
+
+</html>
